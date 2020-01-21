@@ -27,7 +27,7 @@
         }
 
         function getAll(){
-            var url = "/picture/show";
+            var url = "pic/showac";
             var bookingsPromise = $http.get(url);
             bookingsPromise.then(function(response){
                 vm.pictures = response.data;
@@ -35,7 +35,7 @@
         }
 
         function unprocessed(){
-            var url = "/admin/show/";
+            var url = "pic/showun";
             var bookingsPromise = $http.get(url);
             bookingsPromise.then(function(response){
                 vm.unproc = response.data;
@@ -43,16 +43,16 @@
         }
 
         function rejectPicture(id){
-            var url = "/admin/reject/id/" + id;
+            var url = "pic/reject/id/" + id;
             console.log(url)
-            $http.get(url).then(function(response){
+            $http.post(url).then(function(response){
                 vm.unproc = response.data;
             });
         }
         function acceptPicture(id){
-            var url = "/admin/accept/id/" + id;
+            var url = "pic/accept/id/" + id;
             console.log(url)
-            $http.get(url).then(function(response){
+            $http.post(url).then(function(response){
                 vm.unproc = response.data;
             });
         }

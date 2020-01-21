@@ -33,16 +33,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET,"/picture/show").permitAll()
-                .antMatchers(HttpMethod.GET,"/admin/show").permitAll()
-                .antMatchers(HttpMethod.POST,"/admin/accept/id").permitAll()
-                .antMatchers(HttpMethod.POST,"/admin/reject/id").permitAll()
+                .antMatchers(HttpMethod.GET,"/pic/showun").permitAll()
+                .antMatchers(HttpMethod.GET,"/pic/showac").permitAll()
+                .antMatchers(HttpMethod.POST,"/pic/accept/id").permitAll()
+                .antMatchers(HttpMethod.POST,"/pic/reject/id").permitAll()
                 .antMatchers("/**/*.js", "/**/*.css").permitAll()
                 .antMatchers("/resources/**", "/home").permitAll()
                 .antMatchers("/resources/**", "/registration").permitAll()
                 .antMatchers("/swagger-ui.html#").permitAll()
                 .anyRequest().authenticated()
                 .and()
+                .cors().and().csrf().disable()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
@@ -55,12 +56,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager customAuthenticationManager() throws Exception {
         return authenticationManager();
     }
-
-///**   This is to open SWAGGER locally without WebSecurity **/
-//    @Override
-//    public void configure(final WebSecurity web) throws Exception {
-//        web.ignoring().antMatchers("/**");
-//    }
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {

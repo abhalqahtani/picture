@@ -21,8 +21,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "/admin")
 @Log4j2
+@RequestMapping("/pic")
 public class PictureController {
     private PictureService pictureService;
 
@@ -39,7 +39,7 @@ public class PictureController {
 //                        picture.getPath(),picture.getCreatedOn().toString())).collect(Collectors.toList()), HttpStatus.OK);
 //    }
 
-    @RequestMapping(path = "/show", method = RequestMethod.GET)
+    @RequestMapping(path = "/showun", method = RequestMethod.GET)
     @ApiOperation(value = "show all unprocessed picture .. ", response = PictureResponse.class)
     public ResponseEntity<List<PictureResponse>> showAllUnprocessedPictures() {
         log.info("Rest.. Showing unprocessed - Pending picture...");
@@ -47,7 +47,7 @@ public class PictureController {
                 new PictureResponse(picture.getId(),picture.getDescription(),picture.getCategory().name(),picture.getDimension().toString(),
                         picture.getPath(),picture.getCreatedOn().toString())).collect(Collectors.toList()), HttpStatus.OK);    }
 
-    @RequestMapping(path = "/accept/id/{id}",method = RequestMethod.GET)
+    @PostMapping(path = "/accept/id/{id}")
     @ApiOperation(value = "accept picture by id ")
     public ResponseEntity<List<PictureResponse>> acceptPicture(@PathVariable("id") Integer id) throws NoRecordFoundException {
         log.info("accepting picture ... ");
@@ -56,7 +56,7 @@ public class PictureController {
                 new PictureResponse(picture.getId(),picture.getDescription(),picture.getCategory().name(),picture.getDimension().toString(),
                         picture.getPath(),picture.getCreatedOn().toString())).collect(Collectors.toList()), HttpStatus.OK);
     }
-    @RequestMapping(path = "/reject/id/{id}",method = RequestMethod.GET)
+    @PostMapping(path = "/reject/id/{id}")
     @ApiOperation(value = "rejecting picture by id ")
     public ResponseEntity<List<PictureResponse>> deletePicture(@PathVariable("id") Integer id) throws IOException, NoRecordFoundException {
         log.info("Rest: .. reject picture");

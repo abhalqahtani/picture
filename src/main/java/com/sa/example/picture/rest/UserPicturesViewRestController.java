@@ -24,8 +24,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/picture")
 @Log4j2
+@RequestMapping("/pic")
 public class UserPicturesViewRestController {
     private PictureService pictureService;
 
@@ -46,7 +46,7 @@ public class UserPicturesViewRestController {
         return new ResponseEntity<String>("Uploaded .. pending", HttpStatus.ACCEPTED);
     }
 
-    @RequestMapping(path = "/show", method = RequestMethod.GET)
+    @RequestMapping(path = "/showac", method = RequestMethod.GET)
     @ApiOperation(value = "show all accepted picture .. ", response = PictureDto.class)
     public ResponseEntity<List<PictureDto>> showAllPictures() {
         log.info("Rest ... Showing all accepted pictures ...");
